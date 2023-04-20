@@ -13,4 +13,7 @@ $ docker container run -d --name ngnix1 -P nginx
 * ![priview](images/dockerimage9.jpg)
 Results
 * ![preview](images/dockerimageB.jpg)
-* 
+
+
+
+
