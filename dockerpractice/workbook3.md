@@ -107,6 +107,8 @@
     *  now create ACR (search container registries)
     *  ![preview](images/dockerimage50.jpg)
     *  ![preview](images/dockerimage51.jpg)
+    *  first enable the admin user
+    *  ![preview](images/dockerimage61.jpg)
     *  ![preview](images/dockerimage52.jpg)
     *  now login into docker 
     *  $ docker login <loginservername>
@@ -121,7 +123,7 @@
     *  ![preview](images/dockerimage55.jpg)
     *  $ docker tag <ACR loginuser>/nginx
     *  now push the image
-    *  $ docker push <ACR username>/nginx
+    *  $ docker push <ACR username>/nginx or docker push <ACR loginuser>/nginx
     *  ![preview](images/dockerimage57.jpg)
     * Now push the images given below :-
        *  a. student courses register (SCR)
@@ -133,9 +135,116 @@
        *  check in the ACR 
        *  ![preview](images/dockerimage56.jpg)
 
-       * b. spring petclinic
-       * 
-   
+       * b. nop commerce
+       * same as previous task (SCR)
+       * sudo vi Dockerfile  (write a docker file for nop commerce)
+       * docker image build -t nop .
+       * docker image ls
+       * docker tag <image id> <ACR username>/nop
+       * docker tag <ACR loginuser>/nop
+       * docker push <ACR loginuser>/nop
+       * ![preview](images/dockerimage62.jpg)
+       * check results in the ACR
+       *  ![preview](images/dockerimage63.jpg)
+       *  ![preview](images/dockerimage64.jpg)
+* 3. Write a docker compose file for
+    * a. nop commerce
+    * Write a docker file for Nop Commerce
+    *  $ docker image build -t nop .
+    * Write a docker compose file for Nop Commerce
+      
+
+      ```
+      version: "3.9"
+      services:
+        nop:
+          build:
+            context: .
+            dockerfile: Dockerfile
+          networks:
+            - nop-net
+          ports:
+            - "32000:5000"
+          depends_on:
+            - nop-db
+      
+        nop-db:
+          image: mysql:8
+          networks:
+            - nop-net
+          volumes:
+            - nop-db:/var/lib/mysql
+          environment:
+            - MYSQL_ROOT_PASSWORD=prakashprakash
+            - MYSQL_USER=nop
+            - MYSQL_PASSWORD=prakashprakash
+            - MYSQL_DATABASE=nop
+      volumes:
+        nop-db:
+      networks:
+        nop-net:
+      ```
+    * To run the docker compose command is <docker compose up -d>
+    * To check the docker container creation by using command <docker container ls>
+    * ![preview](images/dockerimage59.jpg)
+    * To check the nopcommerce web page use the http://<publicip>:32000 (what even you given the opposite port of 32000:5000)
+    * ![preview](images/dockerimage60.jpg)
+
+
+    * b. spring petclinic
+    * Create a Dockerfile for Springpetclic application and insert that into vi Dockerfile
+    * And then write a docker-compose YAML file for Springpetclic application and insert that into vi Docker-compose.yaml
+    * To run the docker compose command is docker compose up -d
+```
+version: "3.9"
+services:
+  spc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - spc-net
+    ports:
+      - "32000:8080"
+    depends_on:
+      - spc-db
+
+  spc-db:
+    image: mysql:8
+    networks:
+      - spc-net
+    volumes:
+      - spc-db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: supriya123
+      MYSQL_DATABASE: spc
+      MYSQL_USER: spc
+      MYSQL_PASSWORD:supriya123
+volumes:
+  spc-db:
+networks:
+  spc-net:
+```   
+   * To check the springpetclinic web page use the http://<publicip>:32000 (what even you given the opposite port of 32000:8080)
+   * ![preview](images/dockerimage46.jpg)
+
+
+   *  c. Student Courses Register
+   * Create a Dockerfile for Student Courses Register  application and insert that into vi Dockerfile
+    * And then write a docker-compose YAML file for Springpetclic application and insert that into vi Docker-compose.yaml
+    * To run the docker compose command is docker compose up -d
+```
+---
+version: "3.9"
+services:
+  pip:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "30000:8080"
+```
+  * ![preview](images/dockerimage49.jpg)
 
 
 
