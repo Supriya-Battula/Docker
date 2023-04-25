@@ -57,4 +57,92 @@
     ![preview](images/dockerimage46.jpg)
 
     c. student courses register
+      $ vi dockerfile
+      ```
+      FROM alpine/git AS vcs
+      RUN cd / && git clone https://github.com/DevProjectsForDevOps/StudentCoursesRestAPI.git && \
+      pwd && ls /StudentCoursesRestAPI
+      FROM python:3.8.3-alpine As Builder
+      LABEL author="Supriya" organization="qt" project="learning"
+      COPY --from=vcs /StudentCoursesRestAPI /StudentCoursesRestAPI
+      ARG DIRECTORY=StudentCourses
+      RUN cd / StudentCoursesRestAPI cp requirements.txt /StudentCourses
+      ADD . ${DIRECTORY}
+      EXPOSE 8080
+      WORKDIR StudentCoursesRestAPI
+      RUN pip install --upgrade pip
+      RUN pip install -r requirements.txt
+      ENTRYPOINT ["python", "app.py"]
+      ```
+    ```
+    $ docker image build -t scr .
+    $ docker container run -d --name nani -P scr
+    $ docker container ls
+    ```
+    ![preview](images/dockerimage48.jpg)
+    open the port 
+    ![preview](images/dockerimage49.jpg)
+* 2. Push these images to  
+      a. Azure ACR
+      create a virtual machine and login into a terminal
+    * install azure-cli
+     * $ sudo apt update
+     * $ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    * $ az --version    (to check version)
+    * Now install docker 
+    *  $ sudo apt update
+    *  $ curl -fsSL https://test.docker.com -o test-docker.sh
+    *  $ sh test-docker.sh
+    *  $ docker --version (to check version)
+      ![preview](images/dockerimage1.jpg)
+    * $ docker info     (it will not work)
+    * $ whoami  (to check present user name)
+    * $ sudo usermod -aG docker azureuser
+      ![preview](images/dockerimage2.jpg)
+    *  $ exit
+    * then again login to the machine
+    *  $ docker info (docker will run)
+    *  login to azure-cli
+    *  $ az login
+    *  now create ACR (search container registries)
+    *  ![preview](images/dockerimage50.jpg)
+    *  ![preview](images/dockerimage51.jpg)
+    *  ![preview](images/dockerimage52.jpg)
+    *  now login into docker 
+    *  $ docker login <loginservername>
+    *  give the user name and password of ACR
+    *  ![preview](images/dockerimage53.jpg)
+    *  we have login successfully
+    *  Now manually we try to push image of nginix
+    *  $ docker image pull nginx
+    *  $ docker tag <image id> <ACR username>
+    *  $ docker tag <image id> <ACR username>/nginx
+    *  ![preview](images/dockerimage54.jpg)
+    *  ![preview](images/dockerimage55.jpg)
+    *  $ docker tag <ACR loginuser>/nginx
+    *  now push the image
+    *  $ docker push <ACR username>/nginx
+    *  ![preview](images/dockerimage57.jpg)
+    * Now push the images given below :-
+       *  a. student courses register (SCR)
+       *  In the same vm create a docker file for scr
+       *  $ sudo vi Dockerfile  (write a docker file for scr)
+       *  $ docker image build -t scr .
+       *  $ docker image ls
+       *  ![preview](images/dockerimage58.jpg)
+       *  check in the ACR 
+       *  ![preview](images/dockerimage56.jpg)
+
+       * b. spring petclinic
+       * 
+   
+
+
+
+   
+
+
+
+
+
 
