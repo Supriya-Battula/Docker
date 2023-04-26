@@ -1,8 +1,8 @@
 # Docker Workshop-3 Activities (21/APR/2023) - Khaja Sir   
 ------------------------------------------------------------------------ 
 
-* 1. Create a multi-stage docker file to build  
-    a. nop commerce  
+# 1. Create a multi-stage docker file to build  
+   * a. nop commerce  
   In docker playdroung , login into terminal
   $ vi docker file
   (Docker File)
@@ -26,7 +26,7 @@
     Results
     ![preview](images/dockerimage44.jpg)
 
-  b. spring petclinic 
+ * b. spring petclinic 
   $ vi docker file
   (Docker File)
     ```
@@ -38,7 +38,7 @@
     RUN ls /spring-petclinic
     RUN cd /spring-petclinic && mvn package
     FROM amazoncorretto:17-alpine-jdk
-    LABEL author="Prakash Reddy" organization="qt" project="learning"
+    LABEL author="Supriya" organization="qt" project="learning"
     EXPOSE 8080
     ARG HOME_DIR=/spc
     WORKDIR ${HOME_DIR}
@@ -56,7 +56,7 @@
     Results
     ![preview](images/dockerimage46.jpg)
 
-    c. student courses register
+*  c. student courses register
       $ vi dockerfile
       ```
       FROM alpine/git AS vcs
@@ -82,11 +82,11 @@
     ![preview](images/dockerimage48.jpg)
     open the port 
     ![preview](images/dockerimage49.jpg)
-* 2. Push these images to  
-      a. Azure ACR
-      create a virtual machine and login into a terminal
+# 2. Push these images to  
+ *  a. Azure ACR
+    * create a virtual machine and login into a terminal
     * install azure-cli
-     * $ sudo apt update
+    * $ sudo apt update
      * $ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     * $ az --version    (to check version)
     * Now install docker 
@@ -140,18 +140,19 @@
        * sudo vi Dockerfile  (write a docker file for nop commerce)
        * docker image build -t nop .
        * docker image ls
-       * docker tag <image id> <ACR username>/nop
+       * docker tag "image id" <ACR username>/nop
        * docker tag <ACR loginuser>/nop
        * docker push <ACR loginuser>/nop
        * ![preview](images/dockerimage62.jpg)
        * check results in the ACR
        *  ![preview](images/dockerimage63.jpg)
        *  ![preview](images/dockerimage64.jpg)
-* 3. Write a docker compose file for
-    * a. nop commerce
+# 3. Write a docker compose file for
+ * a.    nop commerce
     * Write a docker file for Nop Commerce
     *  $ docker image build -t nop .
     * Write a docker compose file for Nop Commerce
+    * $ vi docker-compose.yml/yaml
       
 
       ```
@@ -191,7 +192,7 @@
     * ![preview](images/dockerimage60.jpg)
 
 
-    * b. spring petclinic
+* b. spring petclinic
     * Create a Dockerfile for Springpetclic application and insert that into vi Dockerfile
     * And then write a docker-compose YAML file for Springpetclic application and insert that into vi Docker-compose.yaml
     * To run the docker compose command is docker compose up -d
@@ -229,7 +230,7 @@ networks:
    * ![preview](images/dockerimage46.jpg)
 
 
-   *  c. Student Courses Register
+*  c. Student Courses Register
    * Create a Dockerfile for Student Courses Register  application and insert that into vi Dockerfile
     * And then write a docker-compose YAML file for Springpetclic application and insert that into vi Docker-compose.yaml
     * To run the docker compose command is docker compose up -d
