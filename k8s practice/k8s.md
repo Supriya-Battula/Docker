@@ -20,7 +20,8 @@
     ```
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
-    sudo usermod -aG docker azureuser
+    sudo usermod -aG docker ubuntu
+
     ```
     * After successful installation re-login into your machine
     * After re-login try to get docker info $ docker info
@@ -33,7 +34,7 @@ chmod +x ./installer_linux
 ./installer_linux
 source ~/.bash_profile
 
-git clone https://github.com/Mirantis/cri-dockerd.git
+   
 cd cri-dockerd
 mkdir bin
 go build -o bin/cri-dockerd
@@ -88,3 +89,6 @@ sudo apt-mark hold kubelet kubeadm kubectl
  * ![preview](images/kube6.jpg)
  * ![preview](images/kube8.jpg)
  * Use Docker Cheat Sheet [ref here](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+
+vi <file name>.yaml
+kubectl apply -f <file name>
