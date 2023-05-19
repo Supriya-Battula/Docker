@@ -17,12 +17,12 @@
    * vm2(node1)
    * vm3(node2)
    * Install docker on all 3 vm's by using below steps,
-    ```
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sh get-docker.sh
-    sudo usermod -aG docker ubuntu
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo usermod -aG docker ubuntu
 
-    ```
+```
     * After successful installation re-login into your machine
     * After re-login try to get docker info $ docker info
     * Install CRI-Dockerd [ref here](https://github.com/Mirantis/cri-dockerd)
@@ -33,8 +33,10 @@ wget https://storage.googleapis.com/golang/getgo/installer_linux
 chmod +x ./installer_linux
 ./installer_linux
 source ~/.bash_profile
-
-   
+```
+to install cri-dockerd(on Both Master & Nodes)
+```
+git clone https://github.com/Mirantis/cri-dockerd.git   
 cd cri-dockerd
 mkdir bin
 go build -o bin/cri-dockerd
@@ -49,7 +51,7 @@ systemctl enable --now cri-docker.socket
 * Now,Installing kubadm, kubectl, kubelet [ref here](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl)
 * To Install kobelet,kubectl,kebeadm (on Both Master & Nodes) as Non-root user
 ```
-cd ~
+exit
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
 sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg

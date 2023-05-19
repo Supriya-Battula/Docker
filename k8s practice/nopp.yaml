@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nop-rs
+  labels:
+    app: nopcommerce
+  annotations:
+    client: nani
+    contact: "123456789"
+spec:
+  minReadySeconds: 1
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nopcommerce
+  template:
+    metadata:
+      name: nop-spec
+      labels:
+        app: nopcommerce
+      annotations:
+        client: nani
+        contact: "123456789"
+    spec:
+      containers:
+        - name: nop
+          image: bsupriya/nop:latest
+          ports:
+            - containerPort: 80
+              protocol: TCP
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nopsvc
+spec:
+  selector:
+    app: nopcommerce
+  ports:
+    - name: nopsvc
+      port: 80
+      targetPort: 80
+      protocol: TCP
+  type: LoadBalancer 
+      

@@ -18,17 +18,20 @@
     EXPOSE 5000
     CMD [ "dotnet", "Nop.Web.dll", "--urls", "http://0.0.0.0:5000" ]
     ```
-    $ docker image build -t nop .
-    $ docker container run -d --name nani -P nop
-    $ docker container ls
-    ![preview](images/dockerimage45.jpg)
-    give port and refresh the page until its work
-    Results
-    ![preview](images/dockerimage44.jpg)
+```    
+$ docker image build -t nop .
+$ docker container run -d --name nani -P nop
+$ docker container ls
+```
+  *  ![preview](images/dockerimage45.jpg)
+  *  give port and refresh the page until its work
+   * Results
+   * ![preview](images/dockerimage44.jpg)
 
  * b. spring petclinic 
   $ vi docker file
   (Docker File)
+
 ```
 FROM alpine/git AS vcs
 RUN cd / && git clone https://github.com/spring-projects/spring-petclinic.git && \
@@ -45,43 +48,45 @@ WORKDIR ${HOME_DIR}
 COPY --from=builder /spring-petclinic/target/spring-*.jar ${HOME_DIR}/spring-petclinic.jar
 EXPOSE 8080
 CMD ["java", "-jar", "spring-petclinic.jar"]
-    ```
-    after buil the docker file 
-    ```
-    $ docker image build -t nop .
-    $ docker container run -d --name nani -P nop
-    $ docker container ls
-    ```
-    ![preview](images/dockerimage47.jpg)
+```
+
+  *  after buil the docker file 
+  
+```
+$ docker image build -t nop .
+$ docker container run -d --name nani -P nop
+$ docker container ls
+```
+*    ![preview](images/dockerimage47.jpg)
     Results
-    ![preview](images/dockerimage46.jpg)
+*    ![preview](images/dockerimage46.jpg)
 
 *  c. student courses register
       $ vi dockerfile
-      ```
-      FROM alpine/git AS vcs
-      RUN cd / && git clone https://github.com/DevProjectsForDevOps/StudentCoursesRestAPI.git && \
-      pwd && ls /StudentCoursesRestAPI
-      FROM python:3.8.3-alpine As Builder
-      LABEL author="Supriya" organization="qt" project="learning"
-      COPY --from=vcs /StudentCoursesRestAPI /StudentCoursesRestAPI
-      ARG DIRECTORY=StudentCourses
-      RUN cd / StudentCoursesRestAPI cp requirements.txt /StudentCourses
-      ADD . ${DIRECTORY}
-      EXPOSE 8080
-      WORKDIR StudentCoursesRestAPI
-      RUN pip install --upgrade pip
-      RUN pip install -r requirements.txt
-      ENTRYPOINT ["python", "app.py"]
-      ```
-    ```
-    $ docker image build -t scr .
-    $ docker container run -d --name nani -P scr
-    $ docker container ls
-    ```
-    ![preview](images/dockerimage48.jpg)
-    open the port 
-    ![preview](images/dockerimage49.jpg)
+```
+FROM alpine/git AS vcs
+RUN cd / && git clone https://github.com/DevProjectsForDevOps/StudentCoursesRestAPI.git && \
+pwd && ls /StudentCoursesRestAPI
+FROM python:3.8.3-alpine As Builder
+LABEL author="Supriya" organization="qt" project="learning"
+COPY --from=vcs /StudentCoursesRestAPI /StudentCoursesRestAPI
+ARG DIRECTORY=StudentCourses
+RUN cd / StudentCoursesRestAPI cp requirements.txt /StudentCourses
+ADD . ${DIRECTORY}
+EXPOSE 8080
+WORKDIR StudentCoursesRestAPI
+RUN pip install --upgrade pip
+UN pip install -r requirements.txt
+ENTRYPOINT ["python", "app.py"]
+```
+```
+$ docker image build -t scr .
+$ docker container run -d --name nani -P scr
+$ docker container ls
+```
+*    ![preview](images/dockerimage48.jpg)
+    * open the port 
+*   ![preview](images/dockerimage49.jpg)
 # 2. Push these images to  
  *  a. Azure ACR
     * create a virtual machine and login into a terminal
@@ -230,7 +235,7 @@ networks:
    * ![preview](images/dockerimage46.jpg)
 
 
-*  c. Student Courses Register
+* c. Student Courses Register
    * Create a Dockerfile for Student Courses Register  application and insert that into vi Dockerfile
     * And then write a docker-compose YAML file for Springpetclic application and insert that into vi Docker-compose.yaml
     * To run the docker compose command is docker compose up -d
@@ -245,7 +250,7 @@ services:
     ports:
       - "30000:8080"
 ```
-  * ![preview](images/dockerimage49.jpg)
+* ![preview](images/dockerimage49.jpg)
 
 
 
