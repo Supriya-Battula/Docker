@@ -7,8 +7,8 @@
  * Create the AKS cluster with the same resource group 
      * 3. <az aks create -g supriya -n kube --enable-managed-identity --node-count 1 --enable-addons monitoring --enable-msi-auth-for-monitoring  --ge...>
  * install aks
-   * 4. <az aks install-cli>
-   * 5. <az aks get-credentials --resource-group supriya --name kube>
+   *  4.    <az aks install-cli>
+   *  5. <az aks get-credentials --resource-group supriya --name kube>
  * After the cluster is created, we need to connect to it
    *   6.  <kubectl get nodes>
  
