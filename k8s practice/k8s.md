@@ -36,7 +36,7 @@ source ~/.bash_profile
 ```
 to install cri-dockerd(on Both Master & Nodes)
 ```
-git clone https://github.com/Mirantis/cri-dockerd.git   
+git clone https://github.com/Mirantis/cri-dockerd.git           
 cd cri-dockerd
 mkdir bin
 go build -o bin/cri-dockerd
@@ -92,5 +92,5 @@ sudo apt-mark hold kubelet kubeadm kubectl
  * ![preview](images/kube8.jpg)
  * Use Docker Cheat Sheet [ref here](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 
-vi <file name>.yaml
-kubectl apply -f <file name>
+* vi <file name>.yaml
+* kubectl apply -f <file name>

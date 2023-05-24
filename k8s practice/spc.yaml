@@ -22,3 +22,40 @@ spec:
       image: bsupriya/springpetclinic
       ports: 
         - containerPort: 8080 
+
+
+
+
+---
+
+
+name: Spring Pet Clinic
+version: 1.0.0
+description: A sample Spring-based pet clinic application
+
+environment:
+  - name: JAVA_HOME
+    value: /path/to/java/home
+  - name: DATABASE_URL
+    value: jdbc:mysql://localhost:3306/petclinic
+  
+
+
+deployment:
+  runtime: java
+  instances: 1
+  memory: 512MB
+
+# Network Configu
+network:
+  ports:
+    - 8080:8080
+
+# Dependencies (if applicable)
+dependencies:
+  - name: mysql-connector-java
+    version: 8.0.23
+
+# Additional Configuration (if needed)
+# Add any other configuration specific to your deployment platform
+
